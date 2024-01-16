@@ -11,6 +11,8 @@
 # Student side autograding was added by Brad Miller, Nick Hay, and
 # Pieter Abbeel (pabbeel@cs.berkeley.edu).
 
+# Jacob Taylor : 2117518
+# Laurie Bédard-Coté : 2086165
 
 """
 This file contains all of the agents that can be selected to control Pacman.  To
