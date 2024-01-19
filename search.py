@@ -101,9 +101,20 @@ def depthFirstSearch(problem:SearchProblem)->List[Direction]:
     '''
         INSÉREZ VOTRE SOLUTION À LA QUESTION 1 ICI
     '''
+    stack = util.Stack()
+    stack.push((problem.getStartState(), []))
+    visited = []
 
-    util.raiseNotDefined()
+    while not stack.isEmpty():
+        state, path = stack.pop()
 
+        if problem.isGoalState(state):
+            return path
+
+        if state not in visited:
+            visited.append(state)
+            for successor in problem.getSuccessors(state):
+                stack.push((successor[0], path + [successor[1]]))
 
 def breadthFirstSearch(problem:SearchProblem)->List[Direction]:
     """Search the shallowest nodes in the search tree first."""
