@@ -116,11 +116,6 @@ def depthFirstSearch(problem:SearchProblem)->List[Direction]:
 def breadthFirstSearch(problem:SearchProblem)->List[Direction]:
     """Search the shallowest nodes in the search tree first."""
 
-
-    '''
-        INSÉREZ VOTRE SOLUTION À LA QUESTION 2 ICI
-    '''
-
     queue = util.Queue()
     queue.push((problem.getStartState(), []))
     visited = []
@@ -140,15 +135,8 @@ def breadthFirstSearch(problem:SearchProblem)->List[Direction]:
 def uniformCostSearch(problem:SearchProblem)->List[Direction]:
     """Search the node of least total cost first."""
 
-
-    '''
-        INSÉREZ VOTRE SOLUTION À LA QUESTION 3 ICI
-    '''
-
     priorityQueue = util.PriorityQueue()
     priorityQueue.push((problem.getStartState(), [], 0), 0)
-    # s = problem.getStartState()
-    # priorityQueue.push((s, [], 0), 0)
     visited = []
 
     while not priorityQueue.isEmpty():
