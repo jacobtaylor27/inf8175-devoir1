@@ -98,9 +98,6 @@ def depthFirstSearch(problem:SearchProblem)->List[Direction]:
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     """
 
-    '''
-        INSÉREZ VOTRE SOLUTION À LA QUESTION 1 ICI
-    '''
     stack = util.Stack()
     stack.push((problem.getStartState(), []))
     visited = []
@@ -124,7 +121,21 @@ def breadthFirstSearch(problem:SearchProblem)->List[Direction]:
         INSÉREZ VOTRE SOLUTION À LA QUESTION 2 ICI
     '''
 
-    util.raiseNotDefined()
+    queue = util.Queue()
+    queue.push((problem.getStartState(), []))
+    visited = []
+
+    while not queue.isEmpty():
+        state, path = queue.pop()
+
+        if problem.isGoalState(state):
+            return path
+
+        if state not in visited:
+            visited.append(state)
+            for successor in problem.getSuccessors(state):
+                queue.push((successor[0], path + [successor[1]]))
+
 
 def uniformCostSearch(problem:SearchProblem)->List[Direction]:
     """Search the node of least total cost first."""
@@ -134,7 +145,24 @@ def uniformCostSearch(problem:SearchProblem)->List[Direction]:
         INSÉREZ VOTRE SOLUTION À LA QUESTION 3 ICI
     '''
 
-    util.raiseNotDefined()
+    priorityQueue = util.PriorityQueue()
+    priorityQueue.push((problem.getStartState(), [], 0), 0)
+    # s = problem.getStartState()
+    # priorityQueue.push((s, [], 0), 0)
+    visited = []
+
+    while not priorityQueue.isEmpty():
+        state, path, cost = priorityQueue.pop()
+
+        if problem.isGoalState(state):
+            return path
+
+        if state not in visited:
+            visited.append(state)
+            for successor in problem.getSuccessors(state):
+                priorityQueue.push((successor[0], path + [successor[1]], cost + successor[2]), cost + successor[2])
+
+
 
 def nullHeuristic(state:GameState, problem:SearchProblem=None)->List[Direction]:
     """
