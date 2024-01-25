@@ -378,7 +378,6 @@ def cornersHeuristic(state, problem):
     unvisited_corners = []
 
     # trouver les coins non visités
-    closest_corner = None
     for corner in corners:
         if corner not in curr_visited_corners:
             unvisited_corners.append(corner)
@@ -394,10 +393,8 @@ def cornersHeuristic(state, problem):
         distance = util.manhattanDistance(curr_state, corner)
         if distance < closest_corner_distance:
             closest_corner_distance = distance
-            closest_corner = corner
 
-    unvisited_corners.remove(closest_corner)
-
+    closest_corner = unvisited_corners[0]
     while unvisited_corners:
         next_closest_corner = unvisited_corners[0]
         next_min_distance = 999999 # arbitrary large number
@@ -516,15 +513,12 @@ def foodHeuristic(state, problem: FoodSearchProblem):
         unvisited_food.append(food)
     
     closest_food_distance = 999999
-    closest_food = None
     for food in unvisited_food:
         distance = util.manhattanDistance(position, food)
         if distance < closest_food_distance:
-            closest_food = food
             closest_food_distance = distance
     
-    unvisited_food.remove(closest_food)
-
+    closest_food = unvisited_food[0]
     while unvisited_food:
         next_closest_food = unvisited_food[0]
         next_min_distance = 999999
@@ -540,4 +534,3 @@ def foodHeuristic(state, problem: FoodSearchProblem):
         unvisited_food.remove(closest_food)
 
     return closest_food_distance + heuristic
-
