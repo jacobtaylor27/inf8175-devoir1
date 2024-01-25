@@ -505,11 +505,39 @@ def foodHeuristic(state, problem: FoodSearchProblem):
     problem.heuristicInfo['wallCount']
     """
     position, foodGrid = state
+    heuristic = 0
+    food_list = foodGrid.asList()
 
-    '''
-        INSÉREZ VOTRE SOLUTION À LA QUESTION 7 ICI
-    '''
+    if len(food_list) == 0:
+        return 0
+    
+    unvisited_food = []
+    for food in food_list:
+        unvisited_food.append(food)
+    
+    closest_food_distance = 999999
+    closest_food = None
+    for food in unvisited_food:
+        distance = util.manhattanDistance(position, food)
+        if distance < closest_food_distance:
+            closest_food = food
+            closest_food_distance = distance
+    
+    unvisited_food.remove(closest_food)
 
+    while unvisited_food:
+        next_closest_food = unvisited_food[0]
+        next_min_distance = 999999
 
-    return 0
+        for food in unvisited_food:
+            distance = util.manhattanDistance(closest_food, food)
+            if distance < next_min_distance:
+                next_min_distance = distance
+                next_closest_food = food
+        
+        closest_food = next_closest_food
+        heuristic += next_min_distance
+        unvisited_food.remove(closest_food)
+
+    return closest_food_distance + heuristic
 
